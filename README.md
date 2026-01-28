@@ -145,13 +145,3 @@ Volumes are used for database and website persistence.
   https://nginx.org/en/docs/http/configuring_https_servers.html
 - WordPress Documentation  
   https://wordpress.org/support/
-
-### AI Usage
-
-AI tools were used to:
-- Clarify technical concepts
-- Validate architectural decisions
-- Improve documentation structure and clarity
-
-All configuration, implementation, and validation were performed manually.
-
