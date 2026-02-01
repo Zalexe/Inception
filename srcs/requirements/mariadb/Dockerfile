@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:11.11
 
 RUN apt-get update && apt-get install -y \
 	mariadb-server \
@@ -7,12 +7,11 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir -p /run/mysqld \
 	&& chown -R mysql:mysql /run/mysqld
 
-COPY tools/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN sed -i 's/bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
+
+COPY tools/entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
 
 EXPOSE 3306
 
-USER mysql
-
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["mysqld"]
