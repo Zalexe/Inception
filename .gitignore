@@ -32,6 +32,7 @@ Thumbs.db
 # Temporary / backup files
 # -----------------------
 *~
+.doc
 *.bak
 *.tmp
 

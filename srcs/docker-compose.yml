@@ -33,9 +33,6 @@ services:
     container_name: mariadb
     build:
       context: ./requirements/mariadb
-    secrets:
-      - db_password
-      - db_root_password
     volumes:
       - mariadb_data:/var/lib/mysql
     env_file:

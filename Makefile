@@ -53,6 +53,5 @@ sprune: downv
 	sudo rm -rf /home/cmarrued/data/wordpress
 	sudo rm -rf /home/cmarrued/data/mariadb
 
-prune
 
-.PHONY: all down stop start restart logs status clean fclean re prune
+.PHONY: all down stop start restart logs status clean fclean re sprune
