@@ -7,6 +7,12 @@ all: build up
 build:
 	mkdir -p /home/cmarrued/data/wordpress
 	mkdir -p /home/cmarrued/data/mariadb
+	$(COMPOSE) build
+
+
+rebuild:
+	mkdir -p /home/cmarrued/data/wordpress
+	mkdir -p /home/cmarrued/data/mariadb
 	$(COMPOSE) build --no-cache
 
 up:
@@ -54,4 +60,4 @@ sprune: downv
 	sudo rm -rf /home/cmarrued/data/mariadb
 
 
-.PHONY: all down stop start restart logs status clean fclean re sprune
+.PHONY: all build rebuild down stop start restart logs status clean fclean re sprune
