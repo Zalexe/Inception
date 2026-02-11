@@ -8,8 +8,6 @@ The project focuses on understanding containerization concepts, service isolatio
 
 All services are built manually using custom Dockerfiles based on lightweight Linux distributions, without relying on pre-built images.
 
----
-
 ## Project Goal
 
 The objective is to deploy a functional WordPress website accessible through HTTPS only, while respecting strict technical and security constraints imposed by the subject.
@@ -18,10 +16,75 @@ The infrastructure must:
 - Be fully containerized
 - Use Docker Compose for orchestration
 - Run inside a Virtual Machine
-- Follow Docker best practices
-- Ensure data persistence and secure communication
+- Ensure data persistence and secure communication by NGINX service
 
----
+## Instructions
+
+1. VM Setup for Development
+
+For development, the VM should be configured to match the production-like environment of the Inception project.
+
+Recommended VM Configuration
+
+OS: Debian 11 (Bullseye)
+
+RAM: ≥ 4 GB
+
+Disk: ≥ 20 GB
+
+Virtualization: VirtualBox or VMware
+
+Optional GUI: XFCE or GNOME for editing convenience
+
+SSH: Enabled for remote access (optional for testing scripts)
+
+1.1 System Setup
+sudo apt update && sudo apt upgrade -y
+sudo apt install sudo git wget curl vim build-essential -y
+
+
+Add your developer user to sudoers:
+
+sudo usermod -aG sudo <username>
+
+2. Docker Development Environment
+
+2.1 Required Services
+
+The project uses the following mandatory services:
+
+MariaDB
+
+Nginx
+cCCC
+WordPress
+
+2.2 Installing Docker
+
+# Add Docker's official GPG key:
+sudo apt update
+sudo apt install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/debian
+Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo usermod -aG docker <username>
+
+
+Log out and log back in for Docker group changes to take effect.
+The VM is ready to be used for the project.
+
 
 ## Infrastructure Overview
 
@@ -55,8 +118,6 @@ The project is composed of the following services:
 - One volume for MariaDB database data
 - Data persists even if containers are destroyed
 
----
-
 ## Design Choices and Comparisons
 
 ### Virtual Machines vs Docker
@@ -69,17 +130,17 @@ The project is composed of the following services:
 **Docker Containers**
 - Share the host kernel
 - Lightweight and fast
-- Ideal for service-based architectures
+- Not environment dependent
 
 Docker is used inside a VM to combine strong isolation with container efficiency.
-
----
+The Subject asks us to decide between 
 
 ### Secrets vs Environment Variables
 
 **Environment Variables**
 - Used for non-sensitive configuration
 - Easy to manage and override
+- Everybody on the machine has access to it
 
 **Docker Secrets**
 - Used for passwords and credentials
@@ -95,11 +156,9 @@ Sensitive data is never stored in Dockerfiles or the repository.
 **Host Network**
 - No isolation
 - Security risks
-- Forbidden by the subject
 
 **Docker Network**
 - Isolated communication
-- Built-in DNS resolution
 - Controlled access
 
 A dedicated Docker network is mandatory and used for all services.
@@ -120,8 +179,6 @@ A dedicated Docker network is mandatory and used for all services.
 
 Volumes are used for database and website persistence.
 
----
-
 ## Technologies Used
 
 - Docker
@@ -132,8 +189,6 @@ Volumes are used for database and website persistence.
 - MariaDB
 - OpenSSL
 - Debian Linux
-
----
 
 ## Resources
 

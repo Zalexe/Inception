@@ -60,4 +60,4 @@ sprune: downv
 	sudo rm -rf /home/cmarrued/data/mariadb
 
 
-.PHONY: all build rebuild down stop start restart logs status clean fclean re sprune
+.PHONY: all build rebuild down stop start logs status clean fclean re sprune
