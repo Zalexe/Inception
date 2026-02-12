@@ -26,7 +26,7 @@ For development, the VM should be configured to match the production-like enviro
 
 Recommended VM Configuration
 
-OS: Debian 11 (Bullseye)
+OS: Debian 12 (Bookworm)
 
 RAM: ≥ 4 GB
 
@@ -71,10 +71,15 @@ sudo chmod a+r /etc/apt/keyrings/docker.asc
 # Add the repository to Apt sources:
 sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
 Types: deb
+
 URIs: https://download.docker.com/linux/debian
+
 Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")
+
 Components: stable
+
 Signed-By: /etc/apt/keyrings/docker.asc
+
 EOF
 
 sudo apt update
