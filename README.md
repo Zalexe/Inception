@@ -201,6 +201,8 @@ Volumes are used for database and website persistence.
   https://docs.docker.com/
 - Docker Compose Documentation  
   https://docs.docker.com/compose/
+- Debian 12 installation 
+  https://cdimage.debian.org/cdimage/archive/12.12.0/amd64/iso-cd/
 - NGINX HTTPS Configuration  
   https://nginx.org/en/docs/http/configuring_https_servers.html
 - WordPress Documentation  
