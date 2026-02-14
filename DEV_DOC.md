@@ -10,7 +10,7 @@ This document provides instructions for developers to set up, configure, and wor
 Clone the Inception repository:
 
 git clone https://github.com/Zalexe/Inception.git Inception
-cd ~/Inception
+cd Inception
 
 
 Typical structure:
@@ -64,6 +64,9 @@ docker exec -it <container_name> bash
 
 Nginx: Located in nginx/conf/. Contains virtual host configuration for the WordPress site. You need a config file for the server service. You can take the default config of nginx and update it. Create a server on it, listening to port 443, and use SSL protocols TLSv1.2 or TLSv1.3. Create two locations on this server:
 ```bash
+- server / {
+    server_name $YOUR_SITE_URL;
+}
 - location / {
     try_files $uri $uri/ /index.php?$args;
 }
